@@ -7,6 +7,25 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="game-container">
+        <h1>Snake Game</h1>
+        <div class="score-board">
+            <div class="score">Score: <span id="score">0</span></div>
+            <div class="high-score">High Score: <span id="highScore">0</span></div>
+        </div>
+        <div id="gameStatus" style="margin: 10px 0; font-weight: bold; color: #667eea;">Click "Start Game" to begin!</div>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <div class="controls">
+            <button id="startBtn">Start Game</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+        <div class="instructions">
+            <h3>How to Play:</h3>
+            <p>Use Arrow Keys to control the snake</p>
+            <p>Eat the red food to grow and score points</p>
+            <p>Don't hit the walls or yourself!</p>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
