@@ -159,3 +159,61 @@ function update() {
 
     drawGame();
 }
+
+function drawGame() {
+    ctx.fillStyle = '#f0f0f0';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+ 
+    snake.forEach((segment, index) => {
+        ctx.fillStyle = index === 0 ? '#2ecc71' : '#27ae60';
+        ctx.fillRect(
+            segment.x * GRID_SIZE,
+            segment.y * GRID_SIZE,
+            GRID_SIZE - 2,
+            GRID_SIZE - 2
+        );
+       
+        if (index === 0) {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(segment.x * GRID_SIZE + 4, segment.y * GRID_SIZE + 4, 4, 4);
+            ctx.fillRect(segment.x * GRID_SIZE + 12, segment.y * GRID_SIZE + 4, 4, 4);
+            ctx.fillStyle = 'black';
+            ctx.fillRect(segment.x * GRID_SIZE + 6, segment.y * GRID_SIZE + 6, 2, 2);
+            ctx.fillRect(segment.x * GRID_SIZE + 14, segment.y * GRID_SIZE + 6, 2, 2);
+        }
+    });
+ 
+    ctx.fillStyle = '#e74c3c';
+    ctx.beginPath();
+    ctx.arc(
+        food.x * GRID_SIZE + GRID_SIZE / 2,
+        food.y * GRID_SIZE + GRID_SIZE / 2,
+        GRID_SIZE / 2 - 2,
+        0,
+        2 * Math.PI
+    );
+    ctx.fill();
+}
+ 
+function gameOver() {
+    clearInterval(gameLoop);
+    gameRunning = false;
+    startBtn.disabled = false;
+    startBtn.textContent = 'Start Game';
+    gameStatus.textContent = 'Game Over! Click "Reset" to play again.';
+    gameStatus.style.color = '#f44336';
+   
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+   
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 40px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('Game Over!', canvas.width / 2, canvas.height / 2 - 20);
+   
+    ctx.font = '20px Arial';
+    ctx.fillText(`Score: ${score}`, canvas.width / 2, canvas.height / 2 + 20);
+    ctx.fillText('Click Reset to play again', canvas.width / 2, canvas.height / 2 + 50);
+}
+ 
+drawGame();
